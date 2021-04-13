@@ -1,6 +1,6 @@
 let timer = 60;
 let score = 0;
-let quizPageEl = document.querySelector(".quizPage");
+let quizPageEl = document.querySelector(".quizQ");
 let choicesContainerEl = document.querySelector("#choicesContainer");
 let questionEl = document.createElement("h2");
 let q = 0;
@@ -30,7 +30,7 @@ let questionsArr = [
 ];
 
 //show questions
-function quizQuestions() {
+function getQuestion() {
   // for (var questionIndex = 0; questionIndex < questionsArr.length; questionIndex++) {
   //show question
   currentQuestion = questionsArr[q];
@@ -44,16 +44,25 @@ function quizQuestions() {
   for (i = 0; i < currentQuestion["choices"].length; i++) {}
   let choicesEl = document.createElement("button");
   choicesEl.className = "btn";
-  let currentChoiceText = document.createTextNode(currentQuestion.choices[i]);
+  let currentChoiceText = document.createTextNode(currentQuestion.choices);
   console.log(currentChoiceText);
+  choicesEl.appendChild(currentChoiceText);
+  choicesContainerEl.appendChild(choicesEl);
 
-  //   document.querySelector("#currentQuestion").textContent =
-  //     currentQuestion.question;
-  //   document.querySelector("#choiceA").textContent = currentQuestion.choiceA;
-  //   document.querySelector("#choiceB").textContent = currentQuestion.choiceB;
-  //   document.querySelector("#choiceC").textContent = currentQuestion.choiceC;
-  //   document.querySelector("#choiceD").textContent = currentQuestion.choiceD;
+  // var i = 0;
+  // while (i < currentQuestion["choices"].length) {
+  //   let choicesEl = document.createElement("button");
+  //   choicesEl.className = "btn";
+  //   let currentChoiceText = document.createTextNode(currentQuestion.choices);
+  //   console.log(currentChoiceText);
 }
+
+//   document.querySelector("#currentQuestion").textContent =
+//     currentQuestion.question;
+//   document.querySelector("#choiceA").textContent = currentQuestion.choiceA;
+//   document.querySelector("#choiceB").textContent = currentQuestion.choiceB;
+//   document.querySelector("#choiceC").textContent = currentQuestion.choiceC;
+//   document.querySelector("#choiceD").textContent = currentQuestion.choiceD;
 
 //check answer
 function checkAnswer(event) {
@@ -73,4 +82,4 @@ function checkAnswer(event) {
 //select answer
 // choicesEl.addEventListener("click", checkAnswer);
 
-quizQuestions();
+getQuestion();
