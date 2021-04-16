@@ -7,8 +7,8 @@ Link to deployed application: https://rtanguyen.github.io/coding-quiz/
 
 ## User Story
 
-![User Story](assets/images/user-story.jpg))
+![User Story](assets/images/user-story.jpg)
 
 ## Acceptance Criteria
 
-![Acceptance Criteria](asets/images/acceptance-criteria.jpg)
+![Acceptance Criteria](assets/images/acceptance-criteria.jpg)
