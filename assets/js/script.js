@@ -97,7 +97,6 @@ function getQuestion() {
   let currentQuestionText = document.createTextNode(
     currentQuestion["question"]
   );
-  // console.log(currentQuestionText);
   questionEl.appendChild(currentQuestionText);
   quizQuestionEl.appendChild(questionEl);
 
