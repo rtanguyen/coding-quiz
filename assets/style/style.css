@@ -26,30 +26,51 @@ body {
 
 .quizPage {
   margin: 0 auto;
-  padding: 8%;
+  padding: 2%;
 }
 
 h2 {
   font-size: 30px;
 }
 
-#choices {
-  width: 200px;
+.choices {
+  width: 300px;
+  margin: 0 5%;
 }
 
-.btn-choice {
+.btn {
   background-color: #15b5b0;
-  width: 200px;
+  width: 300px;
   padding: 5px;
   margin-bottom: 5px;
   color: black;
   font-size: 15px;
   text-decoration: none;
   border-radius: 5px;
-  display: block;
   text-align: left;
+  outline: none;
+  text-align: center;
+  font-size: medium;
 }
 
 .btn-choice:hover {
   background-color: #6dece0;
+}
+
+.alert {
+  font-size: 35px;
+  padding-top: 20px;
+  margin: 0 5%;
+  font-style: italic;
+}
+#correct {
+  color: green;
+}
+
+#incorrect {
+  color: red;
+}
+
+.hidden {
+  display: none;
 }
