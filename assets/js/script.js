@@ -45,6 +45,7 @@ let questionsArr = [
 //start page/questions variables
 let startBtnEl = document.getElementById("start-btn");
 let startPageEl = document.getElementById("start-page");
+let highscoreLinkEl = document.getElementById("highscoreLink");
 let timer = document.getElementById("timer");
 let timeRemaining = 60;
 let timeInterval;
@@ -59,29 +60,29 @@ let alertEl = document.querySelector(".alert");
 let submitBtnEl = document.getElementById("submit-btn");
 let finalScoreEl = document.querySelector("#finalScore");
 let enterInitialsPageEl = document.querySelector(".enterInitials-page");
-let initialsEl = document.querySelector("#initials");
+let initialsInput = document.querySelector("#initials");
 let highscorePageEl = document.querySelector(".highscore-page");
 let playerHighscoreEl = document.querySelector(".playerHighscores");
 let highscoreArr = [];
 let savedHighscoreArr;
 let homeBtnEl = document.getElementById("home");
 let clearScoreBtnEl = document.getElementById("clearScores");
-//check if there's anything in local storage
 
 //start quiz: start timer and unhide questions
 function startQuiz() {
   timer.textContent = "Time: 60";
-  countdown();
-  getQuestion();
   startPageEl.classList.add("hidden");
   quizPageEl.classList.remove("hidden");
+  countdown();
+  getQuestion();
 }
 
 function countdown() {
   timeInterval = setInterval(function () {
-    if (timeRemaining < 0) {
+    if (timeRemaining <= 0) {
       timer.textContent = "";
       clearInterval(timeInterval);
+      enterScore();
       //GO TO HIGHSCORE PAGE
     } else if (timeRemaining >= 1) {
       timer.textContent = "Time: " + timeRemaining;
@@ -111,9 +112,6 @@ function getQuestion() {
 function checkAnswer(event) {
   // console.log(event);
   var selectedAnswer = event.target.textContent;
-  // console.log(selectedAnswer);
-  // console.log(currentQuestion.answer);
-
   if (selectedAnswer === currentQuestion.answer) {
     //display alert
     alertEl.setAttribute("id", "correct");
@@ -149,8 +147,12 @@ function enterScore() {
 }
 
 function saveHighscore() {
+  if (!initialsInput.value) {
+    alert("You need to add your initials!");
+    return false;
+  }
   var playerHighscore = {
-    playerName: initialsEl.value,
+    playerName: initialsInput.value,
     playerScore: score,
   };
   console.log(playerHighscore);
@@ -163,13 +165,20 @@ function saveHighscore() {
 }
 
 function loadHighscore() {
+  //reset page if user accesses using view highscore link
+  startPageEl.classList.add("hidden");
+  quizPageEl.classList.add("hidden");
+  enterInitialsPageEl.classList.add("hidden");
+  highscorePageEl.classList.remove("hidden");
+  clearInterval(timeInterval);
+  //retrieve highscores from storage
   savedHighscoreArr = localStorage.getItem("highscoreStorage");
-  console.log(savedHighscoreArr);
   savedHighscoreArr = JSON.parse(savedHighscoreArr);
+  //sort array by highest to lowest scores
   savedHighscoreArr.sort(function (a, b) {
     return b.playerScore - a.playerScore;
   });
-  console.log(savedHighscoreArr);
+
   //create element for each object saved in highscore array
   for (var i = 0; i < savedHighscoreArr.length; i++) {
     let highscoreListEl = document.getElementById("hs" + i);
@@ -181,6 +190,7 @@ function loadHighscore() {
   }
 }
 
+//reset stats and go back to start screen
 function home() {
   highscorePageEl.classList.add("hidden");
   startPageEl.classList.remove("hidden");
@@ -210,6 +220,9 @@ choicesContainerEl.addEventListener("click", checkAnswer);
 
 //submit highscore
 submitBtnEl.addEventListener("click", saveHighscore);
+
+//view highscores with link
+highscoreLinkEl.addEventListener("click", loadHighscore);
 
 //home
 homeBtnEl.addEventListener("click", home);

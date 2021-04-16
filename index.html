@@ -11,14 +11,14 @@
 
   <!-- link to highscore in header -->
     <header>
-      <a style="color: #15B5B0; text-decoration: none;" href="/highscore.html">View high scores</a>
+      <button id="highscoreLink" style="color: #15B5B0;">View high scores</button>
       <p id="timer"></p>
     </header>
 
     <!-- start page -->
       <div id="start-page">
         <h1>Coding quiz</h1>
-         <p> You will have 60 seconds to answer the following questions. Questions are worth 5 points each. For each wrong question, 10 seconds will be deducted from your remaining time.</p></br>
+         <p> You will have 60 seconds to answer the following questions. Questions are worth 5 points each. For each question answered incorrectly, 10 seconds will be deducted from your remaining time.</p></br>
          <!-- <a href="./quiz.html" class="btn">start quiz</a>  -->
          <button class="btn" id="start-btn">start</button>
         </div>
@@ -34,12 +34,11 @@
         </div>
         <div class="enterInitials-page hidden">
           <h1>All done!</h1>
-          <p>your final score is: <span id="finalScore"></span></p>
-          <p>Enter initials:</p>
+          <p>Your final score is: <span id="finalScore"></span></p>
           <input id="initials" placeholder="Enter your initials"/>
           <button class="btn" id="submit-btn">submit</button>
         </div>
-        <!-- <div class="highscore-page hidden">
+        <div class="highscore-page hidden">
           <h1>High scores!</h1>
           <div class="playerHighscores">
             <p class="hidden" id="hs0"></p>
@@ -54,26 +53,10 @@
             <p class="hidden" id="hs9"></p>
             <p class="hidden" id="hs10"></p>
           </div>
-          <button class="btn" id="home">home</button>
+          <button class="btn" id="home">play again</button>
           <button class="btn" id="clearScores">clear high scores</button>
-        </div> -->
-
-      <!-- questions
-      <div class="questions-page">
-        <h2 class="questions"></h2>
-        <div class="choices"></div>
-
-      </div>
-
-      end screen/high score
-      <div id="end-screen">
-        <h2>Your final score is<span></span></h2>
-        <input type="text" name="player-initials" placeholder="Enter your initials"/>
-        <button class="btn" type="submit">Submit</button>
-      </div>
+        </div>
   
- -->
-
   <script src="./assets/js/script.js"></script>
   </body>
 </html>
