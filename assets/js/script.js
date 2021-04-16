@@ -166,6 +166,9 @@ function loadHighscore() {
   savedHighscoreArr = localStorage.getItem("highscoreStorage");
   console.log(savedHighscoreArr);
   savedHighscoreArr = JSON.parse(savedHighscoreArr);
+  savedHighscoreArr.sort(function (a, b) {
+    return b.playerScore - a.playerScore;
+  });
   console.log(savedHighscoreArr);
   //create element for each object saved in highscore array
   for (var i = 0; i < savedHighscoreArr.length; i++) {
@@ -181,10 +184,22 @@ function loadHighscore() {
 function home() {
   highscorePageEl.classList.add("hidden");
   startPageEl.classList.remove("hidden");
+  timer.textContent = "";
   q = 0;
   score = 0;
   timeRemaining = 60;
   alertEl.textContent = "";
+}
+
+function clearScores() {
+  localStorage.clear();
+  for (var i = 0; i < savedHighscoreArr.length; i++) {
+    let highscoreListEl = document.getElementById("hs" + i);
+    highscoreListEl.classList.add("hidden");
+  }
+  highscoreArr = [];
+  savedHighscoreArr = [];
+  home();
 }
 
 //start quiz event listener
@@ -198,3 +213,6 @@ submitBtnEl.addEventListener("click", saveHighscore);
 
 //home
 homeBtnEl.addEventListener("click", home);
+
+//clear high scores
+clearScoreBtnEl.addEventListener("click", clearScores);
