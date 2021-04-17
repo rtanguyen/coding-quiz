@@ -151,7 +151,7 @@ function saveHighscore() {
     return false;
   }
   var playerHighscore = {
-    playerName: initialsInput.value,
+    playerName: initialsInput.value.toUpperCase(),
     playerScore: score,
   };
   console.log(playerHighscore);
@@ -183,9 +183,13 @@ function loadHighscore() {
     let highscoreListEl = document.getElementById("hs" + i);
     highscoreListEl.classList.remove("hidden");
     highscoreListEl.innerHTML =
+      i +
+      1 +
+      ".      " +
       savedHighscoreArr[i].playerName +
-      " - " +
-      savedHighscoreArr[i].playerScore;
+      " | " +
+      savedHighscoreArr[i].playerScore +
+      "PTS";
   }
 }
 
