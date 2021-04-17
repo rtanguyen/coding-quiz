@@ -52,7 +52,7 @@ let timeInterval;
 let score = 0;
 let quizPageEl = document.querySelector(".quizPage");
 let quizQuestionEl = document.querySelector(".quizQ");
-let questionEl = document.createElement("h2");
+// let questionEl = document.createElement("h2");
 let choicesContainerEl = document.querySelector(".choices");
 let q = 0;
 let alertEl = document.querySelector(".alert");
@@ -94,11 +94,8 @@ function countdown() {
 //show questions and choices
 function getQuestion() {
   currentQuestion = questionsArr[q];
-  let currentQuestionText = document.createTextNode(
-    currentQuestion["question"]
-  );
-  questionEl.appendChild(currentQuestionText);
-  quizQuestionEl.appendChild(questionEl);
+  let currentQuestionText = currentQuestion.question;
+  quizQuestionEl.textContent = currentQuestionText;
 
   for (i = 0; i < currentQuestion["choices"].length; i++) {
     let choiceText = currentQuestion.choices;
@@ -116,21 +113,22 @@ function checkAnswer(event) {
     alertEl.setAttribute("id", "correct");
     alertEl.textContent = "you got it!";
     score += 5;
+    q += 1;
     nextQuestion();
   } else {
     alertEl.setAttribute("id", "incorrect");
     alertEl.textContent = "wrong :(";
     console.log("Incorrect!");
     timeRemaining -= 10;
+    q += 1;
     nextQuestion();
   }
 }
 
 //remove old question/choices/alert and add new. if no new questions, go to page to enter score
 function nextQuestion() {
-  q += 1;
   if (q < questionsArr.length) {
-    questionEl.textContent = "";
+    quizQuestionEl.textContent = "";
     getQuestion();
   } else {
     enterScore();
@@ -202,6 +200,7 @@ function resetQuiz() {
   score = 0;
   timeRemaining = 60;
   alertEl.textContent = "";
+  nextQuestion();
 }
 
 //start quiz event listener
