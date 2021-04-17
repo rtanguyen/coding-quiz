@@ -116,18 +116,18 @@ function checkAnswer(event) {
     alertEl.setAttribute("id", "correct");
     alertEl.textContent = "you got it!";
     score += 5;
-    resetQuiz();
+    nextQuestion();
   } else {
     alertEl.setAttribute("id", "incorrect");
     alertEl.textContent = "wrong :(";
     console.log("Incorrect!");
     timeRemaining -= 10;
-    resetQuiz();
+    nextQuestion();
   }
 }
 
 //remove old question/choices/alert and add new. if no new questions, go to page to enter score
-function resetQuiz() {
+function nextQuestion() {
   q += 1;
   if (q < questionsArr.length) {
     questionEl.textContent = "";
@@ -193,8 +193,8 @@ function loadHighscore() {
   }
 }
 
-//reset stats and go back to start screen
-function home() {
+// reset stats and go back to start screen
+function resetQuiz() {
   highscorePageEl.classList.add("hidden");
   startPageEl.classList.remove("hidden");
   timer.textContent = "";
@@ -202,17 +202,6 @@ function home() {
   score = 0;
   timeRemaining = 60;
   alertEl.textContent = "";
-}
-
-function clearScores() {
-  localStorage.clear();
-  for (var i = 0; i < savedHighscoreArr.length; i++) {
-    let highscoreListEl = document.getElementById("hs" + i);
-    highscoreListEl.classList.add("hidden");
-  }
-  highscoreArr = [];
-  savedHighscoreArr = [];
-  home();
 }
 
 //start quiz event listener
@@ -228,7 +217,16 @@ submitBtnEl.addEventListener("click", saveHighscore);
 highscoreLinkEl.addEventListener("click", loadHighscore);
 
 //home
-homeBtnEl.addEventListener("click", home);
+homeBtnEl.addEventListener("click", resetQuiz);
 
 //clear high scores
-clearScoreBtnEl.addEventListener("click", clearScores);
+clearScoreBtnEl.addEventListener("click", function () {
+  localStorage.clear();
+  for (var i = 0; i < savedHighscoreArr.length; i++) {
+    let highscoreListEl = document.getElementById("hs" + i);
+    highscoreListEl.classList.add("hidden");
+  }
+  highscoreArr = [];
+  savedHighscoreArr = [];
+  resetQuiz();
+});
